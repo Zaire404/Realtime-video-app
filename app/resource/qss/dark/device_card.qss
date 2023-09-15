@@ -1,0 +1,36 @@
+DeviceCard {
+    border: 1px solid rgb(35, 35, 35);
+    border-radius: 8px;
+    background-color: rgb(50, 50, 50);
+}
+
+DeviceCard:hover {
+    background-color: rgb(62, 62, 62);
+    border-color: rgb(37, 37, 37);
+}
+
+#addButton {
+    color: white;
+    font: 18px 'Segoe UI', 'Microsoft YaHei';
+}
+
+#nameLabel {
+    color: white;
+    font: 30px 'Segoe UI', 'Microsoft YaHei';
+    font-weight: bold;
+}
+
+#ipLabel {
+    color: rgb(208, 208, 208);
+    font: 18px 'Segoe UI', 'Microsoft YaHei';
+}
+
+#contentLabel {
+    color: rgb(208, 208, 208);
+    font: 18px 'Segoe UI', 'Microsoft YaHei';
+}
+
+#viewTitleLabel {
+    color: white;
+    font: 50px "Segoe UI SemiBold", "Microsoft YaHei";
+}
