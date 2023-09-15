@@ -19,15 +19,6 @@ if cfg.get(cfg.dpiScale) != "Auto":
 app = QApplication(sys.argv)
 app.setAttribute(Qt.ApplicationAttribute.AA_DontCreateNativeWidgetSiblings)
 
-# internationalization
-# locale = cfg.get(cfg.language).value
-# translator = FluentTranslator(locale)
-# galleryTranslator = QTranslator()
-# galleryTranslator.load(locale, "gallery", ".", ":/gallery/i18n")
-
-# app.installTranslator(translator)
-# app.installTranslator(galleryTranslator)
-
 # create main window
 w = MainWindow()
 w.show()

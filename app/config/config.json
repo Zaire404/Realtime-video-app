@@ -8,6 +8,10 @@
     },
     "QFluentWidgets": {
         "ThemeColor": "#ff009faa",
-        "ThemeMode": "Dark"
+        "ThemeMode": "Auto"
+    },
+    "Backend": {
+        "IP": "127.0.0.1",
+        "Port": "15565"
     }
 }
