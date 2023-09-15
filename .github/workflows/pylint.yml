@@ -16,7 +16,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        python -m pip install pip==23.0.1
         pip install pylint
     - name: Analysing the code with pylint
       run: |
+        echo $(git ls-files '*.py')
+        echo "=============================================>"
         pylint $(git ls-files '*.py')
