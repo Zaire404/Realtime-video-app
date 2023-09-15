@@ -8,6 +8,7 @@ from PySide6.QtWidgets import QGraphicsView
 from ..components.device_info import DeviceInfo
 from ..components.device_card import DeviceCardView
 from ..common.style_sheet import StyleSheet
+from ..common.config import cfg
 
 class DeviceInterface(ScrollArea):
     addDeviceCardSignal = Signal(DeviceInfo)
@@ -31,7 +32,8 @@ class DeviceInterface(ScrollArea):
         load_device_thread.start()
         
     def load_device_info(self):
-        url = "http://127.0.0.1:15565/device/get/1"
+        url = "http://" + cfg.get(cfg.backendIP) + ":" + cfg.get(cfg.backendPort) + "/device/get/1"
+
         try:
             response = requests.get(url)
             response.raise_for_status()  # This will raise an exception if the request was not successful (status code other than 200)

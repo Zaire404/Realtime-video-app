@@ -9,7 +9,6 @@ from qfluentwidgets.components.dialog_box.mask_dialog_base import MaskDialogBase
 from ..components.device_info import DeviceInfo
 from ..common.style_sheet import StyleSheet
 
-# device_name  device_ip describe
 class Ui_DeviceDialog:
     """ Ui of message box """
 

@@ -42,7 +42,6 @@ class BannerWidget(QWidget):
             painter.fillPath(path, QColor(0, 0, 0))
 
         # draw banner image
-        print(self.banner)
         pixmap = self.banner.scaled(
             self.size(), Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
         path.addRect(QRectF(0, h, w, self.height() - h))

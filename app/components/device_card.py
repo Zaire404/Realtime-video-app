@@ -11,6 +11,7 @@ from qfluentwidgets import FluentIcon as FIF
 from ..components.device_info import DeviceInfo
 from ..components.device_dialog import DeviceDialog
 from ..common.style_sheet import StyleSheet
+from ..common.config import cfg
 
 
 class DeviceCard(QFrame):
@@ -77,7 +78,7 @@ class DeviceCard(QFrame):
     
     def updateDevice(self, device_info: DeviceInfo): 
         self.device_info = device_info        
-        url = "http://127.0.0.1:15565/device/update"
+        url = "http://" + cfg.get(cfg.backendIP) + ":" + cfg.get(cfg.backendPort) + "/device/update"
         data = device_info.__dict__()
         headers = {'Content-type': 'application/json'}
         response = requests.post(url, data=json.dumps(data), headers=headers)     
@@ -106,7 +107,7 @@ class DeviceCard(QFrame):
     def deleteDevice(self):
         w = MessageBox("删除", "删除后无法恢复, 是否确认删除?", self.window())
         if w.exec():
-            url = "http://127.0.0.1:15565/device/delete"
+            url = "http://" + cfg.get(cfg.backendIP) + ":" + cfg.get(cfg.backendPort) + "/device/delete"
             data = {'deviceID': self.device_info.id}
             headers = {'Content-type': 'application/json'}
 
@@ -189,7 +190,7 @@ class DeviceCardView(QWidget):
             print('Cancel button is pressed')
             
     def addDevice(self, device_info: DeviceInfo):
-        url = "http://127.0.0.1:15565/device/add"
+        url = "http://" + cfg.get(cfg.backendIP) + ":" + cfg.get(cfg.backendPort) + "/device/add"
         data = {
             "userID": 1,
             "name": device_info.name,

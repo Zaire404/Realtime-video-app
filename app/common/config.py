@@ -37,5 +37,9 @@ class Config(QConfig):
     # software update
     checkUpdateAtStartUp = ConfigItem("Update", "CheckUpdateAtStartUp", True, BoolValidator())
     
+    # backend 
+    backendIP = ConfigItem("Backend", "IP", "127.0.0.1")
+    backendPort = ConfigItem("Backend", "Port", "15565")
+    
 cfg = Config()
 qconfig.load('app/config/config.json', cfg)
