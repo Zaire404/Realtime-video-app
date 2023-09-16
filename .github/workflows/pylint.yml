@@ -22,4 +22,4 @@ jobs:
       run: |
         echo $(git ls-files '*.py')
         echo "=============================================>"
-        pylint $(git ls-files '*.py' --exclude='resource.py')
+        pylint $(git ls-files '*.py' | grep -vE 'resource\.py|/resource/')
