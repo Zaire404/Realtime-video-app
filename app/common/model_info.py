@@ -1,14 +1,16 @@
 import time
 import threading
- 
-class ModelInfo(object):
+import random
+
+
+class ModelInfo:
     _instance_lock = threading.Lock()
-    
+
     def __init__(self):
         time.sleep(1)
         self.class_list = []
         self.color_list = []
- 
+
     @classmethod
     def instance(cls, *args, **kwargs):
         if not hasattr(ModelInfo, "_instance"):
@@ -16,10 +18,10 @@ class ModelInfo(object):
                 if not hasattr(ModelInfo, "_instance"):
                     ModelInfo._instance = ModelInfo(*args, **kwargs)
         return ModelInfo._instance
-    
+
     def generate_random_colors(self):
         print("generate_random_colors start!")
-        import random
+
         num_colors = len(self.class_list)
         print(num_colors)
         self.color_list = []

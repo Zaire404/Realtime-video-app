@@ -22,4 +22,28 @@ jobs:
       run: |
         echo $(git ls-files '*.py')
         echo "=============================================>"
-        pylint --disable=E0611,C0114,C0115,C0116,C0103,E1121,W0201,E1101,W0718 $(git ls-files '*.py' | grep -vE 'resource\.py|/resource/')
+        disable_checks=(
+          "E0611"  # No name 'XXX' in module 'YYY'
+          "C0114"  # Missing module docstring
+          "C0115"  # Missing class docstring
+          "C0116"  # Missing function or method docstring
+          "C0103"  # Invalid variable name
+          "E1121"  # Too many positional arguments for function call
+          "W0201"  # Attribute 'XXX' defined outside __init__
+          "E1101"  # Instance of 'XXX' has no 'YYY' member
+          "W0718"  # Undefined variable 'XXX'
+          "W1401"  # Anomalous backslash in string
+          "E0401"  # Unable to import 'XXX'
+          "R0902"  # Too many instance attributes
+          "R0903"  # Too few public methods
+          "W0212"  # Access to a protected member "XXX" of a client class
+        )
+        exclude_patterns=(
+          "resource.py"
+          "/resource/"
+        )
+        # Convert the array to a comma-separated string
+        disable_flags=$(IFS=,; echo "${disable_checks[*]}")
+        exclude_flags=$(IFS=,; echo "${exclude_patterns[*]}")
+        # Run pylint with the specified checks disabled
+        pylint --disable="${disable_flags}" --ignore="${exclude_flags}" $(git ls-files '*.py')

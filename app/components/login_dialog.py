@@ -1,18 +1,26 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QObject, QEvent
+from PySide6.QtCore import Qt, Signal, QEvent
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QPushButton, QLineEdit
+from PySide6.QtWidgets import (
+    QLabel,
+    QFrame,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QLineEdit,
+)
 from qframelesswindow import FramelessDialog
 
-from qfluentwidgets import TextWrap, PrimaryPushButton, LineEdit
+from qfluentwidgets import PrimaryPushButton, LineEdit
 from qfluentwidgets.components.dialog_box.mask_dialog_base import MaskDialogBase
 
-from ..components.password_edit import PasswordEdit
-from ..common.style_sheet import StyleSheet
+from app.components.password_edit import PasswordEdit
+from app.common.style_sheet import StyleSheet
+
 
 # device_name  device_ip describe
 class Ui_LoginDialog:
-    """ Ui of login dialog """
+    """Ui of login dialog"""
 
     loginSignal = Signal()
     registerSignal = Signal()
@@ -20,15 +28,15 @@ class Ui_LoginDialog:
     def __init__(self, *args, **kwargs):
         pass
 
-    def _setUpUi(self, parent = None):
-        self.accountLabel = QLabel('Account', parent)
-        self.passwordLabel = QLabel('Password', parent)
+    def _setUpUi(self, parent=None):
+        self.accountLabel = QLabel("Account", parent)
+        self.passwordLabel = QLabel("Password", parent)
         self.accountLineEdit = LineEdit(self)
         self.passwordLineEdit = PasswordEdit(self)
-        
+
         self.buttonGroup = QFrame(parent)
-        self.loginButton = PrimaryPushButton(self.tr('Login'), self.buttonGroup)
-        self.registerButton = QPushButton(self.tr('Register'), self.buttonGroup)
+        self.loginButton = PrimaryPushButton(self.tr("Login"), self.buttonGroup)
+        self.registerButton = QPushButton(self.tr("Register"), self.buttonGroup)
 
         self.vBoxLayout = QVBoxLayout(parent)
         self.contentLayout = QVBoxLayout()
@@ -50,7 +58,6 @@ class Ui_LoginDialog:
         self.loginButton.clicked.connect(self.__onLoginButtonClicked)
         self.registerButton.clicked.connect(self.__onRegisterButtonClicked)
 
-
     def __initLayout(self):
         self.vBoxLayout.setSpacing(0)
         self.vBoxLayout.setContentsMargins(0, 0, 0, 0)
@@ -59,12 +66,12 @@ class Ui_LoginDialog:
         self.vBoxLayout.setSizeConstraint(QVBoxLayout.SetMinimumSize)
 
         self.contentLayout.setSpacing(12)
-        self.contentLayout.setContentsMargins(24, 24, 24, 24)   
+        self.contentLayout.setContentsMargins(24, 24, 24, 24)
         self.contentLayout.addWidget(self.accountLabel)
         self.contentLayout.addWidget(self.accountLineEdit)
         self.contentLayout.addWidget(self.passwordLabel)
         self.contentLayout.addWidget(self.passwordLineEdit)
-                
+
         self.buttonLayout.setSpacing(12)
         self.buttonLayout.setContentsMargins(24, 24, 24, 24)
         self.buttonLayout.addWidget(self.loginButton, 1, Qt.AlignVCenter)
@@ -79,18 +86,16 @@ class Ui_LoginDialog:
         self.yesSignal.emit()
 
     def __setQss(self):
-        self.accountLabel.setObjectName('accountLabel')
-        self.passwordLabel.setObjectName('passwordLabel')
-        self.buttonGroup.setObjectName('buttonGroup')
-        self.loginButton.setObjectName('loginButton')
-        self.registerButton.setObjectName('registerButton')
+        self.accountLabel.setObjectName("accountLabel")
+        self.passwordLabel.setObjectName("passwordLabel")
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.loginButton.setObjectName("loginButton")
+        self.registerButton.setObjectName("registerButton")
 
         StyleSheet.LOGIN_DIALOG.apply(self)
 
         self.loginButton.adjustSize()
         self.registerButton.adjustSize()
-        
-        
 
 
 class Dialog(FramelessDialog, Ui_LoginDialog):
@@ -108,7 +113,7 @@ class Dialog(FramelessDialog, Ui_LoginDialog):
         self.titleBar.hide()
 
         self.vBoxLayout.insertWidget(0, self.windowTitleLabel, 0, Qt.AlignTop)
-        self.windowTitleLabel.setObjectName('windowTitleLabel')
+        self.windowTitleLabel.setObjectName("windowTitleLabel")
         StyleSheet.LOGIN_DIALOG.apply(self)
         self.setFixedSize(self.size())
 

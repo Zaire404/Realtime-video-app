@@ -6,6 +6,7 @@ class PasswordEdit(LineEdit):
     """
     A LineEdit with icons to show/hide password entries
     """
+
     CSS = """LineEdit {
         border-radius: 0px;
         height: 30px;
@@ -18,13 +19,15 @@ class PasswordEdit(LineEdit):
         super().__init__(self.parent)
 
         # Set styles
-        #self.setStyleSheet(self.CSS)
+        # self.setStyleSheet(self.CSS)
 
         self.visibleIcon = QIcon(":/app/images/eye_on.png")
         self.hiddenIcon = QIcon(":/app/images/eye_off.png")
 
         self.setEchoMode(LineEdit.Password)
-        self.togglepasswordAction = self.addAction(self.visibleIcon, LineEdit.TrailingPosition)
+        self.togglepasswordAction = self.addAction(
+            self.visibleIcon, LineEdit.TrailingPosition
+        )
         self.togglepasswordAction.triggered.connect(self.on_toggle_password_Action)
         self.password_shown = False
 

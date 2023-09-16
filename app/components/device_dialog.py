@@ -1,16 +1,24 @@
 import re
-from PySide6.QtCore import Qt, Signal, QObject, QEvent
+from PySide6.QtCore import Qt, Signal, QEvent
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QPushButton
 from qframelesswindow import FramelessDialog
 
-from qfluentwidgets import TextWrap, PrimaryPushButton, LineEdit, TextEdit, InfoBar, InfoBarPosition
+from qfluentwidgets import (
+    TextWrap,
+    PrimaryPushButton,
+    LineEdit,
+    TextEdit,
+    InfoBar,
+    InfoBarPosition,
+)
 from qfluentwidgets.components.dialog_box.mask_dialog_base import MaskDialogBase
-from ..components.device_info import DeviceInfo
-from ..common.style_sheet import StyleSheet
+from app.components.device_info import DeviceInfo
+from app.common.style_sheet import StyleSheet
+
 
 class Ui_DeviceDialog:
-    """ Ui of message box """
+    """Ui of message box"""
 
     yesSignal = Signal(DeviceInfo)
     cancelSignal = Signal()
@@ -18,21 +26,20 @@ class Ui_DeviceDialog:
     def __init__(self, *args, **kwargs):
         pass
 
-    def _setUpUi(self, device_info: DeviceInfo, parent = None):
+    def _setUpUi(self, device_info: DeviceInfo, parent=None):
         self.device_info = device_info
-        
+
         # 这边为什么用parent?
-        self.nameLabel = QLabel('Device Name *', parent)
-        self.ipLabel = QLabel('Device IP *', parent)
-        self.describeLabel = QLabel('Describe', parent)
+        self.nameLabel = QLabel("Device Name *", parent)
+        self.ipLabel = QLabel("Device IP *", parent)
+        self.describeLabel = QLabel("Describe", parent)
         self.nameLineEdit = LineEdit(self)
         self.ipLineEdit = LineEdit(self)
         self.describeLineEdit = TextEdit(self)
-        
-        
+
         self.buttonGroup = QFrame(parent)
-        self.yesButton = PrimaryPushButton(self.tr('OK'), self.buttonGroup)
-        self.cancelButton = QPushButton(self.tr('Cancel'), self.buttonGroup)
+        self.yesButton = PrimaryPushButton(self.tr("OK"), self.buttonGroup)
+        self.cancelButton = QPushButton(self.tr("Cancel"), self.buttonGroup)
 
         self.vBoxLayout = QVBoxLayout(parent)
         self.contentLayout = QVBoxLayout()
@@ -84,16 +91,16 @@ class Ui_DeviceDialog:
         self.vBoxLayout.addLayout(self.contentLayout, 1)
         self.vBoxLayout.addWidget(self.buttonGroup, 0, Qt.AlignBottom)
         self.vBoxLayout.setSizeConstraint(QVBoxLayout.SetMinimumSize)
-        
+
         self.contentLayout.setSpacing(12)
-        self.contentLayout.setContentsMargins(24, 24, 24, 24)   
+        self.contentLayout.setContentsMargins(24, 24, 24, 24)
         self.contentLayout.addWidget(self.nameLabel)
         self.contentLayout.addWidget(self.nameLineEdit)
         self.contentLayout.addWidget(self.ipLabel)
         self.contentLayout.addWidget(self.ipLineEdit)
         self.contentLayout.addWidget(self.describeLabel)
         self.contentLayout.addWidget(self.describeLineEdit)
-        
+
         self.buttonLayout.setSpacing(12)
         self.buttonLayout.setContentsMargins(24, 24, 24, 24)
         self.buttonLayout.addWidget(self.yesButton, 1, Qt.AlignVCenter)
@@ -113,31 +120,37 @@ class Ui_DeviceDialog:
             self.yesSignal.emit(self.device_info)
         else:
             InfoBar.error(
-                title=self.tr('Error'),
+                title=self.tr("Error"),
                 content=self.tr(err),
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
                 duration=2000,
-                parent=self
+                parent=self,
             )
 
     def checkValid(self):
-        if self.nameLineEdit.text() == "" : 
+        if self.nameLineEdit.text() == "":
             return False, "name不能为空"
         if self.ipLineEdit.text() == "":
             return False, "ip不能为空"
-        if re.match('^((?!00)\d{1,3}|0{0,2}\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])(\.((?!00)\d{1,3}|0{0,2}\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])){3}$', self.ipLineEdit.text()) == None:
+        if (
+            re.match(
+                "^((?!00)\d{1,3}|0{0,2}\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])(\.((?!00)\d{1,3}|0{0,2}\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])){3}$",
+                self.ipLineEdit.text(),
+            )
+            is None
+        ):
             return False, "ip格式错误"
-        return True, "Success"         
+        return True, "Success"
 
     def __setQss(self):
-        self.nameLabel.setObjectName('nameLabel')
-        self.ipLabel.setObjectName('ipLabel')
-        self.describeLabel.setObjectName('describeLabel')        
-        self.buttonGroup.setObjectName('buttonGroup')
-        self.yesButton.setObjectName('yesButton')
-        self.cancelButton.setObjectName('cancelButton')
+        self.nameLabel.setObjectName("nameLabel")
+        self.ipLabel.setObjectName("ipLabel")
+        self.describeLabel.setObjectName("describeLabel")
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.yesButton.setObjectName("yesButton")
+        self.cancelButton.setObjectName("cancelButton")
 
         StyleSheet.DEVICE_DIALOG.apply(self)
 
@@ -146,7 +159,7 @@ class Ui_DeviceDialog:
 
 
 class Dialog(FramelessDialog, Ui_DeviceDialog):
-    """ Dialog box """
+    """Dialog box"""
 
     yesSignal = Signal(DeviceInfo)
     cancelSignal = Signal()
@@ -162,7 +175,7 @@ class Dialog(FramelessDialog, Ui_DeviceDialog):
         self.titleBar.hide()
 
         self.vBoxLayout.insertWidget(0, self.windowTitleLabel, 0, Qt.AlignTop)
-        self.windowTitleLabel.setObjectName('windowTitleLabel')
+        self.windowTitleLabel.setObjectName("windowTitleLabel")
         StyleSheet.DEVICE_DIALOG.apply(self)
         self.setFixedSize(self.size())
 
@@ -171,12 +184,12 @@ class Dialog(FramelessDialog, Ui_DeviceDialog):
 
 
 class DeviceDialog(MaskDialogBase, Ui_DeviceDialog):
-    """ Message box """
+    """Message box"""
 
     yesSignal = Signal(DeviceInfo)
     cancelSignal = Signal()
 
-    def __init__(self, device_info:DeviceInfo, parent = None):
+    def __init__(self, device_info: DeviceInfo, parent=None):
         super().__init__(parent=parent)
         self._setUpUi(device_info, self.widget)
 

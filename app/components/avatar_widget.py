@@ -2,18 +2,19 @@ from PySide6.QtCore import Qt, QRect
 from PySide6.QtGui import QPainter, QImage, QBrush, QColor, QFont
 from qfluentwidgets import NavigationWidget, isDarkTheme
 
+
 class AvatarWidget(NavigationWidget):
-    """ Avatar widget """
+    """Avatar widget"""
 
     def __init__(self, image_path, parent=None):
         super().__init__(isSelectable=False, parent=parent)
         self.avatar = QImage(image_path).scaled(
-            24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
 
     def paintEvent(self, e):
         painter = QPainter(self)
-        painter.setRenderHints(
-            QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
+        painter.setRenderHints(QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
 
         painter.setPen(Qt.NoPen)
 
@@ -34,7 +35,7 @@ class AvatarWidget(NavigationWidget):
 
         if not self.isCompacted:
             painter.setPen(Qt.white if isDarkTheme() else Qt.black)
-            font = QFont('Segoe UI')
+            font = QFont("Segoe UI")
             font.setPixelSize(14)
             painter.setFont(font)
-            painter.drawText(QRect(44, 0, 255, 36), Qt.AlignVCenter, 'User')
+            painter.drawText(QRect(44, 0, 255, 36), Qt.AlignVCenter, "User")
