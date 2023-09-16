@@ -2,10 +2,8 @@
 import os
 import sys
 
-from PySide6.QtCore import Qt, QTranslator
-from PySide6.QtGui import QFont
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication
-from qfluentwidgets import FluentTranslator
 
 from app.common.config import cfg
 from app.view.main_window import MainWindow
