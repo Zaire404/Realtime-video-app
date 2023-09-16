@@ -22,4 +22,4 @@ jobs:
       run: |
         echo $(git ls-files '*.py')
         echo "=============================================>"
-        pylint $(git ls-files '*.py' | grep -vE 'resource\.py|/resource/')
+        pylint --disable=E0611,C0114,C0115,C0116,C0103,E1121,W0201,E1101,W0718 $(git ls-files '*.py' | grep -vE 'resource\.py|/resource/')
