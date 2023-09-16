@@ -20,7 +20,7 @@ class AddDeviceThread(QThread):
             + cfg.get(cfg.backendIP)
             + ":"
             + cfg.get(cfg.backendPort)
-            + "/device/get/1"
+            + "/device/add"
         )
         data = {
             "userID": 1,
