@@ -80,7 +80,7 @@ class PlayerInterface(ScrollArea):
             self.playButton._postInit()
             return
 
-        if self.commandThread.isConnect() != True:
+        if self.commandThread.isConnect() is not True:
             self.showErrorMessage("未连接到设备!")
             self.playButton._postInit()
             return

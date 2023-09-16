@@ -36,6 +36,7 @@ jobs:
           "E0401"  # Unable to import 'XXX'
           "R0902"  # Too many instance attributes
           "R0903"  # Too few public methods
+          "W0212"  # Access to a protected member "XXX" of a client class
         )
         exclude_patterns=(
           "resource.py"

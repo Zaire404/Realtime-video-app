@@ -70,9 +70,7 @@ class CaptureThread(QThread):
             while self.Threadopen:
                 buf = self.img_sock.recv(struct.calcsize("I"))
                 image_data_len = struct.unpack("I", buf)[0]
-                if image_data_len == 0:
-                    continue
-                else:
+                if image_data_len != 0:
                     break
 
             image_data = self.recv_all(self.img_sock, image_data_len)  # ??????

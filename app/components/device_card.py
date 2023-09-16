@@ -228,7 +228,8 @@ class DeviceCardView(QWidget):
 
         try:
             response = requests.post(url, data=device_json, timeout=5)
-            response.raise_for_status()  # This will raise an exception if the request was not successful (status code other than 200)
+            response.raise_for_status()  
+            # This will raise an exception if the request was not successful (status code other than 200)
 
             response_data = response.json()
             data = response_data["data"]

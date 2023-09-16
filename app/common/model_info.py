@@ -1,8 +1,9 @@
 import time
 import threading
+import random
 
 
-class ModelInfo(object):
+class ModelInfo:
     _instance_lock = threading.Lock()
 
     def __init__(self):
@@ -20,7 +21,6 @@ class ModelInfo(object):
 
     def generate_random_colors(self):
         print("generate_random_colors start!")
-        import random
 
         num_colors = len(self.class_list)
         print(num_colors)
