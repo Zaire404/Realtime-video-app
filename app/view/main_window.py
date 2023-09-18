@@ -72,8 +72,9 @@ class MainWindow(FramelessWindow):
 
     def initWindow(self):
         self.resize(1920, 1080)
-        self.setWindowTitle("Testtest")
-        self.titleBar.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
+        # self.setWindowTitle("医疗陪护服务平台")
+        # self.setWindowIcon(QPixmap(":/app/images/icon.png"))
+        # self.titleBar.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)
 
         # 窗口居中
         desktop = QApplication.screens()[0].availableGeometry()

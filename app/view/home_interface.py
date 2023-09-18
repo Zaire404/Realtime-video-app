@@ -10,8 +10,8 @@ class BannerWidget(QWidget):
         super().__init__(parent=parent)
         self.setFixedHeight(800)
         self.vBoxLayout = QVBoxLayout(self)
-        self.galleryLabel = QLabel("Text", self)
-        self.banner = QPixmap(":/app/images/header.png")
+        self.galleryLabel = QLabel("监控系统", self)
+        self.banner = QPixmap(":/app/images/banner.png")
         self.galleryLabel.setObjectName("galleryLabel")
 
         self.vBoxLayout.setSpacing(0)
